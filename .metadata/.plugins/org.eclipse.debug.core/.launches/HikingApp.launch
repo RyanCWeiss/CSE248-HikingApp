@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-        <listEntry value="/HikingApplication/src/app/HikingApp.java"/>
+        <listEntry value="/HikingApp/src/app/HikingApp.java"/>
     </listAttribute>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
         <listEntry value="1"/>
@@ -12,6 +12,6 @@
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="false"/>
     <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="app.HikingApp"/>
     <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="HikingApplication"/>
-    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="HikingApplication"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="HikingApp"/>
     <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="--module-path &quot;/users/ryanweiss/desktop/java/javafx-sdk-15.0.1/lib&quot; --add-modules=javafx.fxml,javafx.controls"/>
 </launchConfiguration>
