@@ -21,7 +21,7 @@
          <children>
             <ImageView fitHeight="700.0" fitWidth="1000.0" layoutX="3.0" layoutY="44.0" nodeOrientation="INHERIT" pickOnBounds="true">
                <image>
-                  <Image url="@LoginImage.jpg" />
+                  <Image url="@../resources/LoginImage.jpg" />
                </image>
                <effect>
                   <BoxBlur />
@@ -37,7 +37,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="userNameTF" prefHeight="27.0" prefWidth="190.0" promptText="User Name..." />
+                  <TextField fx:id="usernameTF" prefHeight="27.0" prefWidth="190.0" promptText="User Name..." />
                   <HBox alignment="CENTER" prefHeight="51.0" prefWidth="189.0" spacing="10.0" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <children>
                         <Button fx:id="loginBTN" mnemonicParsing="false" onAction="#LogIn" prefHeight="27.0" prefWidth="62.0" text="Log In" />

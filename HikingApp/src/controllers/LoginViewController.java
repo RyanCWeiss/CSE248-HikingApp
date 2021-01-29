@@ -16,18 +16,22 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.HikingAppInstance;
+import model.User;
+import model.UserContainer;
 
 public class LoginViewController implements Initializable {
 
+	static HikingAppInstance appInstance;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
+		appInstance = app.HikingApp.getAppInstance();
 	}
 	
 	
     @FXML
-    private TextField userNameTF;
+    private TextField usernameTF;
 
     @FXML
     private Button loginBTN;
@@ -43,14 +47,27 @@ public class LoginViewController implements Initializable {
 
     @FXML
     void LogIn(ActionEvent event) {
-    	if (validateLoginAttempt()) {
+    	if (validateLoginAttempt(usernameTF,passwordTF)) {
     		logInUser();
     		goHomeView(event);
     	}
     }
-    private boolean validateLoginAttempt() {
+    private boolean validateLoginAttempt(TextField usernameTF, PasswordField passwordTF) {
     	
-    	System.out.println("validateLoginAttempt: incomplete");
+    	System.out.println("validateLoginAttempt: incomplete		(Set to always return true)");
+    	
+    	
+    	String username = usernameTF.getText();
+    	String password = passwordTF.getText();
+    	UserContainer userContainer = appInstance.getUserContainer();
+    	if (userContainer.containsKeyIgnoreCase(username)) {
+    		if (userContainer.getIgnoreCase(username).getUsername().contentEquals(username)) {
+    			User user = userContainer.getIgnoreCase(username);
+    			if (user.getPassword().contentEquals(password)) {
+    				return true;
+    			}
+    		}
+    	}
     	return true;
     }
     private void logInUser() {

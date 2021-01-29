@@ -7,13 +7,19 @@ public class Trail implements Serializable {
 	
 	private String trailName;
 	private String address;
-	private String elevationGain;
-	private String length;
+	private int elevationGain;
+	private int length;
 	private String difficulty;
 	private String type;
 	private String trailID;
 	
-	public Trail(String trailName, String address, String elevationGain, String length, String difficulty, String type) {
+	public String getTrailID() {
+		return trailID;
+	}
+
+
+
+	public Trail(String trailName, String address, int elevationGain, int length, String difficulty, String type) {
 		this.trailName = trailName;
 		this.address = address;
 		this.elevationGain = elevationGain;
@@ -41,19 +47,19 @@ public class Trail implements Serializable {
 		this.address = address;
 	}
 
-	public String getElevationGain() {
+	public int getElevationGain() {
 		return elevationGain;
 	}
 
-	public void setElevationGain(String elevationGain) {
+	public void setElevationGain(int elevationGain) {
 		this.elevationGain = elevationGain;
 	}
 
-	public String getLength() {
+	public int getLength() {
 		return length;
 	}
 
-	public void setLength(String length) {
+	public void setLength(int length) {
 		this.length = length;
 	}
 

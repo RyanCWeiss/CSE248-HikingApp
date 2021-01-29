@@ -31,7 +31,7 @@ public class HikingApp extends Application {
 		primaryStage.show();
 	}
 
-	public void init(URL arg0, ResourceBundle arg1) throws Exception {		// call the load method
+	public void init(URL arg0, ResourceBundle arg1) throws Exception {
 		model.Utilities.bootUp();
 		
 	}

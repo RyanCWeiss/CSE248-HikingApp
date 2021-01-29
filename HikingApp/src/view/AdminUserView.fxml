@@ -23,7 +23,7 @@
                <children>
                   <ImageView fitHeight="700.0" fitWidth="1000.0" layoutX="59.0" layoutY="42.0" nodeOrientation="INHERIT" pickOnBounds="true">
                      <image>
-                        <Image url="@LoginImage.jpg" />
+                        <Image url="@../resources/LoginImage.jpg" />
                      </image>
                      <effect>
                         <BoxBlur />
@@ -36,7 +36,7 @@
                   </Label>
                   <ImageView fx:id="profilepicIV" blendMode="DARKEN" fitHeight="126.0" fitWidth="126.0" layoutX="145.0" layoutY="346.0" pickOnBounds="true">
                      <image>
-                        <Image url="@initial_profile_picture.jpg" />
+                        <Image url="@../resources/initial_profile_picture.jpg" />
                      </image>
                      <effect>
                         <DropShadow />

@@ -10,9 +10,15 @@ public class TrailContainer  implements Serializable, Initializable {
 
 	public static HikingAppInstance appInstance;
 	
+//	private HashMap<trail>	// what will we do to have fast searching? Hashmap for the names or IDs. TreeMap for the rest?
 	
+// linked hashset for anything that might have key overlap (length, gain, difficulty
+
+// hashmap for address
+
+// distance and elevation gain might be a range instead of a 
 	
-	
+// return a set of the values that match any keys that were matched 
 	
 	
 	

@@ -25,21 +25,60 @@ public class Utilities implements Initializable{
 		
 		return "Trail-" + appInstance.getIdNum();
 	}
+	/*
+	 * User Creation validations
+	 * 		unique username, first and last name are filled, password matches confirm password field, number consists of solely 10 numerical chars
+	 */
+	
+	/*
+	 * 	-> validate a new username
+	 */
+	
+	/*
+	 * 	-> validate password matches confirm password
+	 */
+	
+	/*
+	 * 	-> validate a new ensure the name fields are filled
+	 */
+	
+	/*
+	 * 	-> validate a number is 10 digits
+	 */
+	
+	/*
+	 * User Log In Validation
+	 * 		The username exists, the password matches that of the username
+	 */
+	
+	/*
+	 * -> Admin check
+	 * 		the instance of user matching the username used when logging in is an instance of the Amdin Class
+	 */
 	
 	
 	/*
 	 * read and update file
 	 */
 	
+	/*
+	 * populate the app with a set of trails upon the initial run of the app
+	 */
+	
+	/*
+	 * -> Create a random trail using some set of data
+	 */
+	
 	public static void bootUp() throws Exception {
 		
-		try( ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("data/HikingAppObjectFile.dat"))); 
+		try( ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("src/data/HikingAppObjectFile.dat"))); 
 				) {	
 			app.HikingApp.appInstance = (HikingAppInstance) ois.readObject();
-			ois.close();
+			
 			
 			System.out.println("Loading Data File...");	
 			System.out.println(app.HikingApp.appInstance);	// for testing
+			ois.close();
 		}
 		catch(IOException ie){
 			ie.printStackTrace();
@@ -57,7 +96,7 @@ public class Utilities implements Initializable{
 	}
 	
 	public static void updateFile(Serializable data) {
-		try( ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get("data/HikingAppObjectFile.dat")))
+		try( ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get("src/data/HikingAppObjectFile.dat")))
 				) 
 		{	
 			System.out.println(data);
