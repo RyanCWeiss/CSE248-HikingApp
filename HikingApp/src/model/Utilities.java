@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class Utilities implements Initializable{
@@ -30,7 +31,7 @@ public class Utilities implements Initializable{
 	 * User Creation validations
 	 * 		unique username, first and last name are filled, password matches confirm password field, number consists of solely 10 numerical chars
 	 */
-	public boolean validateNewUser(TextField usernameTF, TextField passwordTF, TextField confirmpasswordTF, TextField firstnameTF, TextField lastnameTF, TextField phonenumberTF) {
+	public static boolean validateNewUser(TextField usernameTF, TextField passwordTF, TextField confirmpasswordTF, TextField firstnameTF, TextField lastnameTF, TextField phonenumberTF) {
 		String username = usernameTF.getText();
 		String password = passwordTF.getText();
 		String confirmPassword = confirmpasswordTF.getText();
@@ -49,18 +50,18 @@ public class Utilities implements Initializable{
 		/*
 		 * can display errors if desired
 		 */
-		
+		System.out.println("Utilities.validateNewUser: incomplete; display errors to the Scene");
 		
 		return validUsername && validFirstname && validLastname && validPassword && validConfirmPassword && validPhonenumber;
 	}
 	/*
 	 * 	-> validate a new username
 	 */
-	public boolean validateNewUsername(String username) {							// the username is at least 5 chars and only contains letters& digits
+	private static boolean validateNewUsername(String username) {							// the username is at least 5 chars and only contains letters& digits
 		
 		UserContainer users = appInstance.getUserContainer();
 		
-		if (users.containsKeyIgnoreCase(username)) {
+		if (users.containsKeyIgnoreCase(username.toLowerCase())) {
 			return false;
 		}
 		if (username.length() < 5) {
@@ -79,7 +80,7 @@ public class Utilities implements Initializable{
 	 *  -> password is >= 5 chars and has >= 1 letter and >= 1 number
 	 * 	-> validate password matches confirm password
 	 */
-	private boolean validateNewPassword(String password) {	// password must have >= 1 num, 1 letter, >= 5 chars
+	private static boolean validateNewPassword(String password) {	// password must have >= 1 num, 1 letter, >= 5 chars
 		boolean hasLetter = false;
 		boolean hasNumber = false;
 		
@@ -100,14 +101,14 @@ public class Utilities implements Initializable{
 		
 		return hasNumber && hasLetter;
 	}
-	private boolean validateNewPasswordMatch(String password, String confirmPassword) {
+	private static boolean validateNewPasswordMatch(String password, String confirmPassword) {
 		return password.contentEquals(confirmPassword);
 	}
 	
 	/*
 	 * 	-> validate a new ensure the name fields are filled
 	 */
-	private boolean validateNewFirstName(String firstname){							// the name contains only letters
+	private static boolean validateNewFirstName(String firstname){							// the name contains only letters
 		boolean hasNonAlphabeticChar = false;
 		for (int i = 0; i < firstname.length() - 1; i++) {
 			char ch = firstname.charAt(i);
@@ -119,7 +120,7 @@ public class Utilities implements Initializable{
 		return !(hasNonAlphabeticChar);
 	}
 		
-	public boolean validateNewLastName(String lastname){							// the name contains only letters
+	private static boolean validateNewLastName(String lastname){							// the name contains only letters
 		boolean hasNonAlphabeticChar = false;
 		for (int i = 0; i < lastname.length() - 1; i++) {
 			char ch = lastname.charAt(i);
@@ -134,7 +135,7 @@ public class Utilities implements Initializable{
 	/*
 	 * 	-> validate a number is 10 digits
 	 */
-	public boolean validateNewPhoneNumber(String phoneNumber){						// the phone number is composed of 10 digit chars ONLY
+	private static boolean validateNewPhoneNumber(String phoneNumber){						// the phone number is composed of 10 digit chars ONLY
 		boolean hasNonDigitChar = false;
 		boolean hasLength = (phoneNumber.length() == 10);
 		
@@ -154,9 +155,57 @@ public class Utilities implements Initializable{
 	 * 		The username exists, the password matches that of the username
 	 */
 	
+	public static boolean validateLogin(TextField usernameTF, PasswordField passwordTF) {
+		String username = usernameTF.getText();
+		String password = passwordTF.getText();
+		
+		boolean validUsername = validateUsername(username);
+		boolean validPassword = validatePassword(username, password);
+		
+		/*
+		 * can display errors if desired***
+		 */
+		System.out.println("Utilities.validateLogin: incomplete; display errors to the Scene");
+		
+		return validUsername && validPassword;
+	}
+	
+	/*
+	 * validate that the username belongs to a user instance stored in the userContainer
+	 */
+	private static boolean validateUsername(String username) {
+		
+		UserContainer users = appInstance.getUserContainer();
+		if(users.containsKeyIgnoreCase(username)) {
+			if (users.getIgnoreCase(username).getUsername().contentEquals(username)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	/*
+	 * validate that the password belongs to the user that the username belongs to (return false if the user doesnt exist)
+	 */
+	private static boolean validatePassword(String username, String password) {
+		
+		UserContainer users = appInstance.getUserContainer();
+		User user = null;
+		if(users.containsKeyIgnoreCase(username)) {
+			user = users.getIgnoreCase(username);
+			
+			if (user.getUsername().contentEquals(username)) {
+				if (user.getPassword().contentEquals(password)) {
+					return true;
+				}
+			} 
+		}
+		return false;
+	}
+	
+	
 	/*
 	 * -> Admin check
-	 * 		the instance of user matching the username used when logging in is an instance of the Amdin Class
+	 * 		the instance of user matching the username used when logging in is an instance of the Amdin Class// Maybe use Strategy Pattern instead***
 	 */
 	
 	
@@ -164,10 +213,32 @@ public class Utilities implements Initializable{
 	/*
 	 * populate the app with a set of trails upon the initial run of the app
 	 */
-	
+	private void populateRandomTrails() {
+		
+	}
 	/*
 	 * -> Create a random trail using some set of data
 	 */
+	private Trail generateRandomTrail() {
+		
+	}
+	
+	
+	/*
+	 * populate the app with a set of Users upon the initial run of the app
+	 */
+	private void populateRandomUsers() {
+		
+	}
+	
+	/*
+	 * -> Create a random user using some set of data
+	 */
+	private User generateRandomUser() {
+		
+		
+	}
+	
 	
 	/*
 	 * read and update file
