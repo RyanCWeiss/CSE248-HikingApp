@@ -40,7 +40,7 @@
                   <TextField fx:id="usernameTF" prefHeight="27.0" prefWidth="190.0" promptText="User Name..." />
                   <HBox alignment="CENTER" prefHeight="51.0" prefWidth="189.0" spacing="10.0" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <children>
-                        <Button fx:id="loginBTN" mnemonicParsing="false" onAction="#LogIn" prefHeight="27.0" prefWidth="62.0" text="Log In" />
+                        <Button fx:id="loginBTN" mnemonicParsing="false" onAction="#logIn" prefHeight="27.0" prefWidth="62.0" text="Log In" />
                         <Button fx:id="registerBTN" mnemonicParsing="false" onAction="#Register" prefHeight="27.0" prefWidth="69.0" text="Register" />
                      </children>
                   </HBox>

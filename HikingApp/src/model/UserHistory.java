@@ -70,10 +70,9 @@ public class UserHistory  implements Serializable, Initializable {
 	 * If Streams are used...
 	 * - have a check that a filter type has been added; if added, apply the filter to the Linked List that will be returned
 	 */
-	public LinkedList<TrailHikedInstance> useFilters(){ // params will be the fields that data was entered into
-		
-		
-	}
+//	public LinkedList<TrailHikedInstance> useFilters(){ // params will be the fields that data was entered into	
+	
+//	}
 	
 	// or i can create boolean methods and stream them
 	private boolean trailAddressMatch(TrailHikedInstance hike, String address) {

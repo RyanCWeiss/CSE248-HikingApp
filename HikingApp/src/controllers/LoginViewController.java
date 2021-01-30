@@ -46,7 +46,7 @@ public class LoginViewController implements Initializable {
     private ImageView loginIV;
 
     @FXML
-    void LogIn(ActionEvent event) {
+    void logIn(ActionEvent event) {
     	if (validateLoginAttempt(usernameTF,passwordTF)) {
     		logInUser();
     		goHomeView(event);
