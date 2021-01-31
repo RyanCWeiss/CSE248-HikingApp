@@ -219,9 +219,9 @@ public class Utilities implements Initializable{
 	/*
 	 * -> Create a random trail using some set of data
 	 */
-	private Trail generateRandomTrail() {
-		
-	}
+//	private Trail generateRandomTrail() {
+//		
+//	}
 	
 	
 	/*
@@ -234,10 +234,10 @@ public class Utilities implements Initializable{
 	/*
 	 * -> Create a random user using some set of data
 	 */
-	private User generateRandomUser() {
-		
-		
-	}
+//	private User generateRandomUser() {
+//		
+//		
+//	}
 	
 	
 	/*
@@ -260,6 +260,7 @@ public class Utilities implements Initializable{
 		if (app.HikingApp.appInstance == null) {
 			app.HikingApp.appInstance = new HikingAppInstance();
 			appInstance = app.HikingApp.appInstance;
+			appInstance.getUserContainer().putIfAbsent(new User("Jane", "Jane", "Doe", "Doe", "1234567890" ));
 //			fillNames();
 //			populateBooks();
 //			addInitialUser("Jane", "Doe", "Jane", "Doe", "64 Gighard Drive", "1234567890", true);

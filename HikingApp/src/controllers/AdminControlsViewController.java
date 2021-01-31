@@ -16,9 +16,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.HikingAppInstance;
 
 public class AdminControlsViewController implements Initializable {
 
+		public static HikingAppInstance appInstance;
 	
 	  	@FXML
 	    private TableView<?> historyTV;
@@ -121,7 +123,7 @@ public class AdminControlsViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
+		appInstance = app.HikingApp.getAppInstance();
 	}
 	
 	

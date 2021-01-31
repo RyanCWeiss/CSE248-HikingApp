@@ -82,4 +82,8 @@ public class User implements Serializable {
 	public boolean isAdmin() {
 		return (this instanceof Admin);
 	}
+	
+	public String toString() {
+		return this.getUsername() + ": (" + this.getFirstName() + " " + this.getLastName() + ") " + this.getPhoneNumber();
+	}
 }

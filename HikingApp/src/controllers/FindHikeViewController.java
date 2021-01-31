@@ -16,9 +16,12 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import model.HikingAppInstance;
 
 public class FindHikeViewController implements Initializable {
 
+	public static HikingAppInstance appInstance;
+	
 	@FXML
     private DatePicker dateDP;
 
@@ -88,7 +91,7 @@ public class FindHikeViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
+		appInstance = app.HikingApp.getAppInstance();
 	}
 
 }

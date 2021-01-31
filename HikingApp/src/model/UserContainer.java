@@ -7,11 +7,11 @@ import java.util.TreeMap;
 
 import javafx.fxml.Initializable;
 
-public class UserContainer  implements Serializable, Initializable {
+public class UserContainer  implements Serializable{
 
-	public static HikingAppInstance appInstance;
+//	public static HikingAppInstance appInstance;
 	
-	public TreeMap<String, User> userTM;	// <User.username,User pair>
+	public TreeMap<String, User> userTM;	// <User.username.toLowerCase(),User pair>
 	
 	public UserContainer() {
 		this.userTM = new TreeMap<String, User>();
@@ -33,7 +33,9 @@ public class UserContainer  implements Serializable, Initializable {
 	 */
 	public User putIfAbsent(User user) {
 		if (!this.containsKeyIgnoreCase(user.getUsername())) {
+			System.out.println("Putting user...");
 			this.put(user);
+			
 			return user;
 		} else {
 			return null;
@@ -45,15 +47,16 @@ public class UserContainer  implements Serializable, Initializable {
 	 */
 	private void put(User user) {
 		userTM.put(user.getUsername().toLowerCase(), user);
+		System.out.println("User Stored: " + this.getIgnoreCase(user.getUsername()).toString() + "...");
 	}
 	
 	
 	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		appInstance = app.HikingApp.getAppInstance();
-	}
+//	@Override
+//	public void initialize(URL arg0, ResourceBundle arg1) {
+//		// TODO Auto-generated method stub
+//		appInstance = app.HikingApp.getAppInstance();
+//	}
 	
 	
 }

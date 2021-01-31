@@ -15,12 +15,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.HikingAppInstance;
+import model.User;
 
 public class RegisterViewController implements Initializable {
 
+	public static HikingAppInstance appInstance;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		appInstance = app.HikingApp.getAppInstance();
 	}
 	
 	    @FXML
@@ -55,19 +60,28 @@ public class RegisterViewController implements Initializable {
 
 	    @FXML
 	    void createAccount(ActionEvent event) {
-	    	if (validateNewUser()) {
-	    		saveNewAccount();
+	    	if (validateNewUser(usernameTF, passwordTF, confirmpasswordTF, firstnameTF, lastnameTF, phonenumberTF)) {
+	    		saveNewAccount(usernameTF, passwordTF, firstnameTF, lastnameTF, phonenumberTF);
 	    		goToHomePageView(event);
 	    	}
 	    }
 	    
-	    private void saveNewAccount() {
+	    private void saveNewAccount(TextField usernameTF, TextField  passwordTF, TextField  firstnameTF, TextField  lastnameTF, TextField  phonenumberTF) {
+	    	String username = usernameTF.getText();
+	    	String password = passwordTF.getText();
+	    	String firstname = firstnameTF.getText();
+	    	String lastname = lastnameTF.getText();
+	    	String phonenumber = phonenumberTF.getText();
+	    	
+	    	appInstance.getUserContainer().putIfAbsent(new User(username, password, firstname, lastname, phonenumber));
+	    	
 	    	System.out.println("saveNewAccount: incomplete");
 	    }
 	    
-	    private boolean validateNewUser() {
+	    private boolean validateNewUser(TextField usernameTF, TextField  passwordTF, TextField  confirmpasswordTF, TextField  firstnameTF, TextField  lastnameTF, TextField  phonenumberTF) {
 	    	System.out.println("validateNewUser: incomplete");
-	    	return true;
+	    	return model.Utilities.validateNewUser(usernameTF, passwordTF, confirmpasswordTF, firstnameTF, lastnameTF, phonenumberTF);
+	    	
 	    }
 	    
 	    private void goToHomePageView(ActionEvent event) {

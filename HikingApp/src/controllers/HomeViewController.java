@@ -20,9 +20,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import model.HikingAppInstance;
 
 public class HomeViewController implements Initializable {
 
+		public static HikingAppInstance appInstance;
+		
 	 	@FXML
 	    private AnchorPane anchorpane;
 	
@@ -153,7 +156,7 @@ public class HomeViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
+		appInstance = app.HikingApp.getAppInstance();
 	}
 
 }

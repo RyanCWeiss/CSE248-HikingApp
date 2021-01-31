@@ -16,11 +16,10 @@ public class HikingApp extends Application {
 	
 	public static void main(String[] args) {
 		
-		Application.launch(args);
+		launch(args);
 		
 	}
 
-	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
@@ -30,8 +29,9 @@ public class HikingApp extends Application {
 		
 		primaryStage.show();
 	}
-
-	public void init(URL arg0, ResourceBundle arg1) throws Exception {
+	
+	@Override
+	public void init() throws Exception {
 		model.Utilities.bootUp();
 		
 	}
@@ -46,5 +46,5 @@ public class HikingApp extends Application {
 	public static HikingAppInstance getAppInstance() {
 		return appInstance;
 	}
-
 }
+

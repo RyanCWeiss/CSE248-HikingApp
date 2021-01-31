@@ -22,7 +22,7 @@ import model.UserContainer;
 
 public class LoginViewController implements Initializable {
 
-	static HikingAppInstance appInstance;
+	public static HikingAppInstance appInstance;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -47,31 +47,33 @@ public class LoginViewController implements Initializable {
 
     @FXML
     void logIn(ActionEvent event) {
-    	if (validateLoginAttempt(usernameTF,passwordTF)) {
-    		logInUser();
+    	if (validateLoginAttempt(usernameTF, passwordTF)) {
+    		logInUser(appInstance.getUserContainer().getIgnoreCase(usernameTF.getText()));
     		goHomeView(event);
     	}
     }
     private boolean validateLoginAttempt(TextField usernameTF, PasswordField passwordTF) {
     	
     	System.out.println("validateLoginAttempt: incomplete		(Set to always return true)");
-    	
-    	
-    	String username = usernameTF.getText();
-    	String password = passwordTF.getText();
-    	UserContainer userContainer = appInstance.getUserContainer();
-    	if (userContainer.containsKeyIgnoreCase(username)) {
-    		if (userContainer.getIgnoreCase(username).getUsername().contentEquals(username)) {
-    			User user = userContainer.getIgnoreCase(username);
-    			if (user.getPassword().contentEquals(password)) {
-    				return true;
-    			}
-    		}
-    	}
-    	return true;
+//    	
+//    	String username = usernameTF.getText();
+//    	String password = passwordTF.getText();
+//    	UserContainer userContainer = appInstance.getUserContainer();
+//    	if (userContainer.containsKeyIgnoreCase(username)) {
+//    		if (userContainer.getIgnoreCase(username).getUsername().contentEquals(username)) {
+//    			User user = userContainer.getIgnoreCase(username);
+//    			if (user.getPassword().contentEquals(password)) {
+//    				return true;
+//    			}
+//    		}
+//    	}
+//    	return true;
+    	return model.Utilities.validateLogin(usernameTF, passwordTF);
     }
-    private void logInUser() {
-    	
+    
+    private void logInUser(User user) {
+    	appInstance.setLoggedInUser(user);
+    	System.out.println("logged in as: " + user);
     	System.out.println("logInUser: incomplete");
     }
     private void goHomeView(ActionEvent event) {
