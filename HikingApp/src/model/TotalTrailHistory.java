@@ -44,11 +44,11 @@ public class TotalTrailHistory  implements Serializable, Initializable {
 		return (hike.getTrailType().contains(type));
 	}
 	private boolean trailGainMatch(int val1, int val2, TrailHikedInstance hike) {
-		int gain = hike.getTrailElevationGain();
+		double gain = hike.getTrailElevationGain();
 		return ((gain <= val1 && gain >= val2) || (gain >= val1 && gain <= val2));
 	}
 	private boolean trailLengthMatch(int val1, int val2, TrailHikedInstance hike) {
-		int length = hike.getTrailLength();
+		double length = hike.getTrailLength();
 		return ((length <= val1 && length >= val2) || (length >= val1 && length <= val2));
 	}
 	private boolean trailUserMatch(TrailHikedInstance hike, String username) {

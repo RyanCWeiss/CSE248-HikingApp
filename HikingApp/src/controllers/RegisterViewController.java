@@ -61,21 +61,24 @@ public class RegisterViewController implements Initializable {
 	    @FXML
 	    void createAccount(ActionEvent event) {
 	    	if (validateNewUser(usernameTF, passwordTF, confirmpasswordTF, firstnameTF, lastnameTF, phonenumberTF)) {
-	    		saveNewAccount(usernameTF, passwordTF, firstnameTF, lastnameTF, phonenumberTF);
+	    		User user = saveNewAccount(usernameTF, passwordTF, firstnameTF, lastnameTF, phonenumberTF);
+	    		appInstance.setLoggedInUser(user);
 	    		goToHomePageView(event);
 	    	}
 	    }
 	    
-	    private void saveNewAccount(TextField usernameTF, TextField  passwordTF, TextField  firstnameTF, TextField  lastnameTF, TextField  phonenumberTF) {
+	    private User saveNewAccount(TextField usernameTF, TextField  passwordTF, TextField  firstnameTF, TextField  lastnameTF, TextField  phonenumberTF) {
 	    	String username = usernameTF.getText();
 	    	String password = passwordTF.getText();
 	    	String firstname = firstnameTF.getText();
 	    	String lastname = lastnameTF.getText();
 	    	String phonenumber = phonenumberTF.getText();
 	    	
-	    	appInstance.getUserContainer().putIfAbsent(new User(username, password, firstname, lastname, phonenumber));
+	    	User user = new User(username, password, firstname, lastname, phonenumber);
+	    	appInstance.getUserContainer().putIfAbsent(user);
 	    	
 	    	System.out.println("saveNewAccount: incomplete");
+	    	return user;
 	    }
 	    
 	    private boolean validateNewUser(TextField usernameTF, TextField  passwordTF, TextField  confirmpasswordTF, TextField  firstnameTF, TextField  lastnameTF, TextField  phonenumberTF) {

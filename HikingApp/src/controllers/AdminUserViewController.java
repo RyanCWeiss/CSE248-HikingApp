@@ -18,11 +18,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.HikingAppInstance;
+import model.Trail;
+import model.TrailHikedInstance;
+import model.User;
 
 public class AdminUserViewController implements Initializable{
 
 	public static HikingAppInstance appInstance;
-	
+	private static User loggedInUser;
     @FXML
     private ImageView profilepicIV;
 
@@ -60,28 +63,28 @@ public class AdminUserViewController implements Initializable{
     private Button searchuserBTN;
 
     @FXML
-    private TableView<?> historyTV;
+    private TableView<TrailHikedInstance> historyTV;
 
     @FXML
-    private TableColumn<?, ?> trailTC;
+    private TableColumn<TrailHikedInstance, String> trailTC;
 
     @FXML
-    private TableColumn<?, ?> addressTC;
+    private TableColumn<TrailHikedInstance, String> addressTC;
 
     @FXML
-    private TableColumn<?, ?> elevationgainTC;
+    private TableColumn<TrailHikedInstance, Double> elevationgainTC;
 
     @FXML
-    private TableColumn<?, ?> typeTF;
+    private TableColumn<TrailHikedInstance, String> typeTF;
 
     @FXML
-    private TableColumn<?, ?> lengthTC;
+    private TableColumn<TrailHikedInstance, Double> lengthTC;
 
     @FXML
-    private TableColumn<?, ?> difficultyTC;
+    private TableColumn<TrailHikedInstance, String> difficultyTC;
 
     @FXML
-    private TableColumn<?, ?> durationTC;
+    private TableColumn<TrailHikedInstance, String> durationTC;
 
     @FXML
     void goAdminControlsView(ActionEvent event) {
@@ -120,7 +123,7 @@ public class AdminUserViewController implements Initializable{
     	
     }
     private void logOutUser() {
-    	
+    	appInstance.setLoggedInUser(null);
     	System.out.println("logOutUser: incomplete");
     }
     
@@ -154,6 +157,7 @@ public class AdminUserViewController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		appInstance = app.HikingApp.getAppInstance();
+		loggedInUser = appInstance.getLoggedInUser();
 	}
 	
 	

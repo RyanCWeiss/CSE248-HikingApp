@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -9,7 +10,10 @@ import java.io.Serializable;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+import java.util.TreeMap;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
@@ -32,6 +36,7 @@ public class Utilities implements Initializable{
 	 * 		unique username, first and last name are filled, password matches confirm password field, number consists of solely 10 numerical chars
 	 */
 	public static boolean validateNewUser(TextField usernameTF, TextField passwordTF, TextField confirmpasswordTF, TextField firstnameTF, TextField lastnameTF, TextField phonenumberTF) {
+		UserContainer users = app.HikingApp.getAppInstance().getUserContainer();
 		String username = usernameTF.getText();
 		String password = passwordTF.getText();
 		String confirmPassword = confirmpasswordTF.getText();
@@ -46,6 +51,7 @@ public class Utilities implements Initializable{
 		boolean validPassword = validateNewPassword(password);
 		boolean validConfirmPassword = validateNewPasswordMatch(password, confirmPassword);
 		boolean validPhonenumber = validateNewPhoneNumber(phonenumber);
+		System.out.println(validUsername + " " + validFirstname + " " + validLastname + " " + validPassword + " " + validConfirmPassword + " " +  validPhonenumber);
 		
 		/*
 		 * can display errors if desired
@@ -59,7 +65,7 @@ public class Utilities implements Initializable{
 	 */
 	private static boolean validateNewUsername(String username) {							// the username is at least 5 chars and only contains letters& digits
 		
-		UserContainer users = appInstance.getUserContainer();
+		UserContainer users = app.HikingApp.getAppInstance().getUserContainer();
 		
 		if (users.containsKeyIgnoreCase(username.toLowerCase())) {
 			return false;
@@ -142,7 +148,7 @@ public class Utilities implements Initializable{
 		for (int i = 0; i < phoneNumber.length() - 1; i++) {
 			char ch = phoneNumber.charAt(i);
 			
-			if (!Character.isLetter(ch)) {
+			if (!Character.isDigit(ch)) {
 				hasNonDigitChar = true;
 			}
 		}
@@ -175,7 +181,7 @@ public class Utilities implements Initializable{
 	 */
 	private static boolean validateUsername(String username) {
 		
-		UserContainer users = appInstance.getUserContainer();
+		UserContainer users = app.HikingApp.getAppInstance().getUserContainer();
 		if(users.containsKeyIgnoreCase(username)) {
 			if (users.getIgnoreCase(username).getUsername().contentEquals(username)) {
 				return true;
@@ -188,12 +194,13 @@ public class Utilities implements Initializable{
 	 */
 	private static boolean validatePassword(String username, String password) {
 		
-		UserContainer users = appInstance.getUserContainer();
+		UserContainer users = app.HikingApp.getAppInstance().getUserContainer();
 		User user = null;
 		if(users.containsKeyIgnoreCase(username)) {
 			user = users.getIgnoreCase(username);
 			
 			if (user.getUsername().contentEquals(username)) {
+				System.out.println(user.getPassword() + " " + password);
 				if (user.getPassword().contentEquals(password)) {
 					return true;
 				}
@@ -213,31 +220,77 @@ public class Utilities implements Initializable{
 	/*
 	 * populate the app with a set of trails upon the initial run of the app
 	 */
-	private void populateRandomTrails() {
+	private static void populateRandomTrails() {
+		TrailContainer trails = app.HikingApp.getAppInstance().getTrailContainer();
+		String baseName = "Trail-";
 		
+		for (int i = 0; i < 500; i++) {
+			int j = i/26;
+			String name = baseName + ((char)((int)(Math.random() * 90-65)+65)) + j;
+			int typeInt = (int)(Math.random()*3);
+			int difficultyInt = (int)(Math.random()*3);
+			String type;
+			String difficulty;
+			if (typeInt ==0) {
+				type = "Loop";
+			} else if (typeInt == 1) {
+				type = "Out and Back";
+			} else {
+				type = "Point to Point";
+			}
+			if (difficultyInt ==0) {
+				difficulty = "Easy";
+			} else if (difficultyInt == 1) {
+				difficulty = "Moderate";
+			} else {
+				difficulty = "Hard";
+			}
+			double length = ((int)(Math.random() * 200))/10.0;
+			double gain = ((int)(Math.random() * 5000))/10.0;
+			trails.putIfAbsent(new Trail(name, "random address that doesnt matter for functionality", gain, length, difficulty, type));
+			
+		}
 	}
-	/*
-	 * -> Create a random trail using some set of data
-	 */
-//	private Trail generateRandomTrail() {
-//		
-//	}
 	
 	
 	/*
 	 * populate the app with a set of Users upon the initial run of the app
 	 */
-	private void populateRandomUsers() {
+	private static void populateRandomUsers() throws FileNotFoundException {
+		int size = 1000;
+		String [][] names = getNames(size);
 		
+		UserContainer users = app.HikingApp.getAppInstance().getUserContainer();
+		for (int i = 0; i < 100; i++) {
+			String firstName = names[0][(int)(Math.random()* size)];
+			String lastName = names[1][(int)(Math.random()* size)];
+			String username = firstName+lastName + (i);
+			String password = lastName + i;
+			String phoneNumber = "631" + (int)(Math.random()* 999) + "" + (int)(Math.random()* 9999);
+			
+			User user = new User(username, firstName, lastName, password, phoneNumber);
+			users.putIfAbsent(user);
+			System.out.println(user);
+		}
+	}
+	/*
+	 * create an array of first and last names
+	 */
+	private static String [][] getNames(int size) throws FileNotFoundException{
+		
+		String [][] names = new String [2][size];	// generating 1000 first & last names
+		String firstNameFileName = "src/data/First_Names.txt";
+		String lastNameFileName = "src/data/Last_Names.txt";
+		Scanner scFName = new Scanner(new File(firstNameFileName)); 
+	    Scanner scLName = new Scanner(new File(lastNameFileName)); 
+		int count = 0;
+		while (scFName.hasNext() && scLName.hasNextLine() && count < size) { 
+			names[0][count] = scFName.nextLine();
+		 	names[1][count++] = scLName.nextLine();
+		}
+		return names;
 	}
 	
-	/*
-	 * -> Create a random user using some set of data
-	 */
-//	private User generateRandomUser() {
-//		
-//		
-//	}
 	
 	
 	/*
@@ -261,11 +314,9 @@ public class Utilities implements Initializable{
 			app.HikingApp.appInstance = new HikingAppInstance();
 			appInstance = app.HikingApp.appInstance;
 			appInstance.getUserContainer().putIfAbsent(new User("Jane", "Jane", "Doe", "Doe", "1234567890" ));
-//			fillNames();
-//			populateBooks();
-//			addInitialUser("Jane", "Doe", "Jane", "Doe", "64 Gighard Drive", "1234567890", true);
-//			addInitialUser("John", "Doe", "John", "Doe","64 Gighard Drive", "0987654321", false);
-//			populateUsers();
+			populateRandomUsers();
+			populateRandomTrails();
+			
 			System.out.println("Filling new HikingAppInstance");
 			}
 	}
@@ -290,5 +341,7 @@ public class Utilities implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		appInstance = app.HikingApp.getAppInstance();
+		System.out.println("Util.appInstance: " + appInstance);
+		System.out.println("Util.appInstance.getUserContainer(): " + appInstance.getUserContainer());
 	}
 }

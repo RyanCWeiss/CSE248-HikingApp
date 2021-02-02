@@ -33,6 +33,7 @@ public class HikingApp extends Application {
 	@Override
 	public void init() throws Exception {
 		model.Utilities.bootUp();
+		System.out.println("container != null?:" + appInstance.getUserContainer() != null);
 		
 	}
 	

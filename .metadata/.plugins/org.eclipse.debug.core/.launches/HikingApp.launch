@@ -10,6 +10,7 @@
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES" value="true"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_CLASSPATH_ONLY_JAR" value="false"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="false"/>
+    <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 15.0.2 [15.0.2]"/>
     <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="app.HikingApp"/>
     <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="HikingApplication"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="HikingApp"/>

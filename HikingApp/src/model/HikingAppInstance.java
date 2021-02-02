@@ -12,6 +12,8 @@ public class HikingAppInstance  implements Serializable{
 	
 	private User loggedInUser;
 	
+	private boolean isAdmin;
+	
 	private int idNum;
 	
 	public HikingAppInstance() {

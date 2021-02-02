@@ -17,6 +17,7 @@ public class User implements Serializable {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
+		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.historyLL = new UserHistory(this);
 		this.profilePicString = "/view/initial_profile_picture.jpg";

@@ -45,7 +45,7 @@ public class UserHistory  implements Serializable, Initializable {
 	public LinkedList<TrailHikedInstance> searchGainRange(LinkedList<TrailHikedInstance> list, int val1, int val2){
 		LinkedList<TrailHikedInstance> returnedList = new LinkedList<TrailHikedInstance>();
 		for (TrailHikedInstance hike : list) {
-			int gain = hike.getTrailElevationGain();
+			double gain = hike.getTrailElevationGain();
 			
 			if ((gain <= val1 && gain >= val2) || (gain >= val1 && gain <= val2)) {
 				returnedList.add(hike);
@@ -56,7 +56,7 @@ public class UserHistory  implements Serializable, Initializable {
 	public LinkedList<TrailHikedInstance> searchLengthRange(LinkedList<TrailHikedInstance> list, int val1, int val2){
 		LinkedList<TrailHikedInstance> returnedList = new LinkedList<TrailHikedInstance>();
 		for (TrailHikedInstance hike : list) {
-			int length = hike.getTrailLength();
+			double length = hike.getTrailLength();
 			
 			if ((length <= val1 && length >= val2) || (length >= val1 && length <= val2)) {
 				returnedList.add(hike);
@@ -74,7 +74,7 @@ public class UserHistory  implements Serializable, Initializable {
 	
 //	}
 	
-	// or i can create boolean methods and stream them
+	// or i can create boolean methods and stream them	// LOOK AT FIND A HIKE METHODS
 	private boolean trailAddressMatch(TrailHikedInstance hike, String address) {
 		return (hike.getTrailAddress().contains(address));
 		
@@ -89,11 +89,11 @@ public class UserHistory  implements Serializable, Initializable {
 		return (hike.getTrailType().contains(type));
 	}
 	private boolean trailGainMatch(int val1, int val2, TrailHikedInstance hike) {
-		int gain = hike.getTrailElevationGain();
+		double gain = hike.getTrailElevationGain();
 		return ((gain <= val1 && gain >= val2) || (gain >= val1 && gain <= val2));
 	}
 	private boolean trailLengthMatch(int val1, int val2, TrailHikedInstance hike) {
-		int length = hike.getTrailLength();
+		double length = hike.getTrailLength();
 		return ((length <= val1 && length >= val2) || (length >= val1 && length <= val2));
 	}
 	

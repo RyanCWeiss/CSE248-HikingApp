@@ -27,6 +27,7 @@ public class LoginViewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		appInstance = app.HikingApp.getAppInstance();
+		System.out.println("Has Jane: " + appInstance.getUserContainer().containsKeyIgnoreCase("Jane"));
 	}
 	
 	

@@ -12,9 +12,9 @@ public class TrailHikedInstance implements Serializable{
 	private User user;
 	private String username;
 	private String trailName;
-	private int trailLength;
+	private double trailLength;
 	private String trailDifficulty;
-	private int trailElevationGain;
+	private double trailElevationGain;
 	private String trailAddress;
 	private String trailID;
 	
@@ -92,11 +92,11 @@ public class TrailHikedInstance implements Serializable{
 		this.trailName = trailName;
 	}
 
-	public int getTrailLength() {
+	public double getTrailLength() {
 		return trailLength;
 	}
 
-	public void setTrailLength(int trailLength) {
+	public void setTrailLength(double trailLength) {
 		this.trailLength = trailLength;
 	}
 
@@ -108,11 +108,11 @@ public class TrailHikedInstance implements Serializable{
 		this.trailDifficulty = trailDifficulty;
 	}
 
-	public int getTrailElevationGain() {
+	public double getTrailElevationGain() {
 		return trailElevationGain;
 	}
 
-	public void setTrailElevationGain(int trailElevationGain) {
+	public void setTrailElevationGain(double trailElevationGain) {
 		this.trailElevationGain = trailElevationGain;
 	}
 
