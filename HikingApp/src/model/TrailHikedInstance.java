@@ -1,8 +1,12 @@
 package model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class TrailHikedInstance implements Serializable{
 
@@ -18,13 +22,15 @@ public class TrailHikedInstance implements Serializable{
 	private double trailElevationGain;
 	private String trailAddress;
 	private String trailID;
+	private String pace;
 	
-	public TrailHikedInstance(User user, LocalDate date, String duration, Trail trail) {
+	public TrailHikedInstance(User user, LocalDate startDate, LocalDate endDate, String startTimeHour, String startTimeMin, String endTimeHour, String endTimeMin, Trail trail) throws ParseException {
+		int minInDay = 1440;
 		
 		this.user = user;
 		this.username = user.getUsername();
 		this.date = date;
-		this.duration = duration;
+		this.duration = calculateDuration(startDate, endDate, startTimeHour, startTimeMin, endTimeHour, endTimeMin);
 		this.trail = trail;
 		this.trailName = trail.getTrailName();
 		this.trailLength = trail.getLength();
@@ -34,8 +40,57 @@ public class TrailHikedInstance implements Serializable{
 		this.trailAddress = trail.getAddress();
 		this.trailID = trail.getTrailID();
 		this.trailType = trail.getType();
+		this.pace = ((int)(trailLength /(calculateDurationInt(startDate, endDate, startTimeHour, startTimeMin, endTimeHour, endTimeMin)/60.0))*100)/100.0 + " mph";
 	
 	}
+	
+	public String toString() {
+		return "Trail: " + trailName + " User: " + this.user.getUsername() + " Time: " + duration + " Pace: " + pace;
+	}
+	
+	private String calculateDuration(LocalDate startDate, LocalDate endDate, String startTimeHour, String startTimeMin, String endTimeHour, String endTimeMin) throws ParseException {
+		
+//		int startingMin = Integer.parseInt(startTimeHour)*60 + Integer.parseInt(startTimeMin);
+//		int endingMin = Integer.parseInt(endTimeHour)*60 + Integer.parseInt(endTimeMin);
+//		
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+//	    Date firstDate = sdf.parse(startDate.toString());
+//	    Date secondDate = sdf.parse(startDate.toString());
+//
+//	    long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+//	    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+//	    
+//	    long dayDifferenceInMin = diff * 1440;
+//	    
+//	    int totalDifferenceInMin = (int)((endingMin - startingMin) + dayDifferenceInMin);
+//	    int hours = totalDifferenceInMin /60;
+//	    int min = totalDifferenceInMin % 60;
+//		
+//		return "" + hours + " Hours " + min + " Min";
+		int totalDifferenceInMin = calculateDurationInt(startDate, endDate, startTimeHour, startTimeMin, endTimeHour, endTimeMin);
+	    int hours = totalDifferenceInMin /60;
+	    int min = totalDifferenceInMin % 60;
+		
+		return ( "" + hours + " Hours " + min + " Min");
+	}
+	private int calculateDurationInt(LocalDate startDate, LocalDate endDate, String startTimeHour, String startTimeMin, String endTimeHour, String endTimeMin) throws ParseException {
+		int startingMin = Integer.parseInt(startTimeHour)*60 + Integer.parseInt(startTimeMin);
+		int endingMin = Integer.parseInt(endTimeHour)*60 + Integer.parseInt(endTimeMin);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+	    Date firstDate = sdf.parse(startDate.toString());
+	    Date secondDate = sdf.parse(endDate.toString());
+
+	    long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+	    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+//	    System.out.println(firstDate.ge);
+	    
+	    long dayDifferenceInMin = diff * 1440;
+	    
+	    return (int)((endingMin - startingMin) + dayDifferenceInMin);
+	}
+	
+	
 	
 	public String getUsername() {
 		return username;

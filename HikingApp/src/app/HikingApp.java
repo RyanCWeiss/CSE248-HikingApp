@@ -39,7 +39,8 @@ public class HikingApp extends Application {
 	
 	@Override
 	public void stop() {									// close hook update data
-//		lib.setLoggedInUser(null);
+		appInstance.setLoggedInUser(null);
+		
 		model.Utilities.updateFile(appInstance);
 	}
 	

@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.Map.Entry;
@@ -25,6 +26,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.HikingAppInstance;
@@ -46,17 +48,27 @@ public class FindHikeViewController implements Initializable {
 	@FXML
 	private static ObservableList<String> minuteList = FXCollections.observableArrayList(
 			"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59");
-	@FXML
-    private DatePicker dateDP;
 
     @FXML
     private Button loghikeBTN;
+    
+    @FXML
+    private DatePicker startdateDP;
 
     @FXML
-    private ChoiceBox<String> hoursCB;
+    private ChoiceBox<String> starthoursCB;
 
     @FXML
-    private ChoiceBox<String> minutesCB;
+    private ChoiceBox<String> startminutesCB;
+    
+    @FXML
+    private DatePicker enddateDP;
+
+    @FXML
+    private ChoiceBox<String> endhoursCB;
+
+    @FXML
+    private ChoiceBox<String> endminutesCB;
 
     @FXML
     private TableView<Trail> TrailsTV;
@@ -101,7 +113,7 @@ public class FindHikeViewController implements Initializable {
     private TextField maxgainTF;
     
     @FXML
-    private HBox loghikeHB;
+    private GridPane loghikeGP;
     
     @FXML
     private TableView<Trail> trailsTV;
@@ -126,20 +138,28 @@ public class FindHikeViewController implements Initializable {
 
 
     @FXML
-    void logHike(ActionEvent event) {
+    void logHike(ActionEvent event) throws ParseException {
     	System.out.println("logHike: incomplete");
-    	TrailHikedInstance trailHiked = new TrailHikedInstance(loggedInUser,dateDP.getValue(), hoursCB.getValue() + "Hours " + minutesCB.getValue() + "Minutes", selectedTrail);
+    	
+    	
+    	TrailHikedInstance trailHiked = new TrailHikedInstance(loggedInUser,startdateDP.getValue(), enddateDP.getValue(), starthoursCB.getValue(), startminutesCB.getValue(), endhoursCB.getValue(), endminutesCB.getValue(), selectedTrail);
+    	
+    	
     	loggedInUser.getHistory().getHistoryLL().add(trailHiked);
     	appInstance.getTotalTrailHistory().addHike(loggedInUser, trailHiked);
     	clearLogFields();
     	selectedTrail = null;
-    	loghikeHB.setDisable(true);
+    	loghikeGP.setDisable(true);
     	System.out.println("logHike: incomplete ");
+    	System.out.println(trailHiked.toString());
     }
     public void clearLogFields() {
-    	dateDP.setValue(null);
-    	hoursCB.setValue("Hours");
-    	minutesCB.setValue("Minutes");
+    	startdateDP.setValue(null);
+    	starthoursCB.setValue("Hours");
+    	startminutesCB.setValue("Minutes");
+    	enddateDP.setValue(null);
+    	endhoursCB.setValue("Hours");
+    	endminutesCB.setValue("Minutes");
     }
     
     @FXML 
@@ -147,9 +167,9 @@ public class FindHikeViewController implements Initializable {
 		selectedTrail = trailsTV.getSelectionModel().getSelectedItem();
 		
 		if (selectedTrail != null) {
-			loghikeHB.setDisable(false);
+			loghikeGP.setDisable(false);
 		} else {
-			loghikeHB.setDisable(true);
+			loghikeGP.setDisable(true);
 			
 		}
 	}
@@ -361,8 +381,10 @@ public class FindHikeViewController implements Initializable {
 		// TODO Auto-generated method stub
 		appInstance = app.HikingApp.getAppInstance();
 		selectedTrail = null;
-		hoursCB.setItems(hourList);
-		minutesCB.setItems(minuteList);
+		starthoursCB.setItems(hourList);
+		startminutesCB.setItems(minuteList);
+		endhoursCB.setItems(hourList);
+		endminutesCB.setItems(minuteList);
 		loggedInUser = appInstance.getLoggedInUser();
 	}
 
