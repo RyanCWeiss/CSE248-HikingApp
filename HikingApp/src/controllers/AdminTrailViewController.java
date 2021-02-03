@@ -36,6 +36,7 @@ public class AdminTrailViewController implements Initializable{
 	private static ObservableList<Trail >displayedTrails;
 	private static Trail selectedTrail;
 	
+	
 	@FXML
 	private static ObservableList<String> typeList = FXCollections.observableArrayList(
 		    "Loop", "Out and Back", "Point to Point");
@@ -136,6 +137,9 @@ public class AdminTrailViewController implements Initializable{
     private TextField maxgainTF;
 
     @FXML
+    private Button deletetrailBTN;
+    
+    @FXML
     void clearTextFields(ActionEvent event) {
     	trailnameTF.setText("");
 		addressTF.setText("");
@@ -146,13 +150,37 @@ public class AdminTrailViewController implements Initializable{
 		trailnameTF.setDisable(false);
 		selectedTrail = null;
 		createnewtrailBTN.setDisable(false);
-    	System.out.println("clearTextFields: incomplete");
+		deletetrailBTN.setDisable(true);
+		updatetrailBTN.setDisable(true);
+		System.out.println("clearTextFields: incomplete");
     }
-
+    @FXML
+    void deleteTrail(ActionEvent event) {
+    	deletetrailBTN.setDisable(true);
+		updatetrailBTN.setDisable(true);
+		appInstance.getTrailContainer().getTrailTM().remove(selectedTrail.getTrailName().toLowerCase());
+		
+		displayedTrails = FXCollections.observableArrayList(search());
+		trailsTV.setItems(displayedTrails);
+		trailsTV.getColumns().get(0).setVisible(false);
+		trailsTV.getColumns().get(0).setVisible(true);
+		clearTextFields(event);
+		System.out.println("deleteTrail: incomplete");
+    }
     @FXML
     void updateTrail(ActionEvent event) {
-
-
+    	Trail trailToModify = selectedTrail;
+    	trailToModify.setAddress(addressTF.getText());
+    	trailToModify.setElevationGain(Double.parseDouble(elevationTF.getText()));
+    	trailToModify.setLength(Double.parseDouble(lengthTF.getText()));
+    	trailToModify.setType(typeCB.getValue());
+    	trailToModify.setDifficulty(difficultyCB.getValue());
+    	
+    	displayedTrails = FXCollections.observableArrayList(search());
+		trailsTV.setItems(displayedTrails);
+		trailsTV.getColumns().get(0).setVisible(false);
+		trailsTV.getColumns().get(0).setVisible(true);
+		
     	System.out.println("updateTrail: incomplete");
     }
 	
@@ -215,6 +243,8 @@ public class AdminTrailViewController implements Initializable{
 			lengthTF.setText(selectedTrail.getLength() + "");
 			trailnameTF.setDisable(true);
 			createnewtrailBTN.setDisable(true);
+			deletetrailBTN.setDisable(false);
+			updatetrailBTN.setDisable(false);
 		} else {
 			trailnameTF.setText("");
 			addressTF.setText("");

@@ -24,6 +24,14 @@ public class UserHistory  implements Serializable, Initializable {
 	 * methods to search the history of a user
 	 */
 	
+	public LinkedList<TrailHikedInstance> getHistoryLL() {
+		return historyLL;
+	}
+
+	public void setHistoryLL(LinkedList<TrailHikedInstance> historyLL) {
+		this.historyLL = historyLL;
+	}
+
 	public LinkedList<TrailHikedInstance> searchTrailName(LinkedList<TrailHikedInstance> list, String searchQuery){
 		LinkedList<TrailHikedInstance> returnedList = new LinkedList<TrailHikedInstance>();
 		for (TrailHikedInstance hike : list) {

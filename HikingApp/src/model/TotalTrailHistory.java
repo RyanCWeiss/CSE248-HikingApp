@@ -24,7 +24,9 @@ public class TotalTrailHistory  implements Serializable, Initializable {
 	
 	
 	
-	
+	public void addHike(User user, TrailHikedInstance trailHiked) {
+		historyLL.add(trailHiked);
+	}
 	
 	
 	/*

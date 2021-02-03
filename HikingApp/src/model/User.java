@@ -9,7 +9,7 @@ public class User implements Serializable {
 	private String lastName;
 	private String password;
 	private String phoneNumber;
-	private UserHistory historyLL;
+	private UserHistory history;
 	private String profilePicString;
 	
 	public User(String username, String firstName, String lastName, String password, String phoneNumber) {
@@ -19,7 +19,7 @@ public class User implements Serializable {
 		this.username = username;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
-		this.historyLL = new UserHistory(this);
+		this.history = new UserHistory(this);
 		this.profilePicString = "/view/initial_profile_picture.jpg";
 		
 	}
@@ -64,12 +64,12 @@ public class User implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 	
-	public UserHistory getHistoryLL() {
-		return historyLL;
+	public UserHistory getHistory() {
+		return history;
 	}
 
 	public void setHistory(UserHistory history) {
-		this.historyLL = history;
+		this.history = history;
 	}
 
 	public String getProfilePicString() {

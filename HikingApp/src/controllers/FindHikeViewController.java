@@ -29,6 +29,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.HikingAppInstance;
 import model.Trail;
+import model.TrailHikedInstance;
 import model.User;
 
 public class FindHikeViewController implements Initializable {
@@ -40,11 +41,11 @@ public class FindHikeViewController implements Initializable {
 	
 	
 	@FXML
-	private static ObservableList<Integer> hourList = FXCollections.observableArrayList(
-		    0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24);
+	private static ObservableList<String> hourList = FXCollections.observableArrayList(
+		    "0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24");
 	@FXML
-	private static ObservableList<Integer> minuteList = FXCollections.observableArrayList(
-			 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59);
+	private static ObservableList<String> minuteList = FXCollections.observableArrayList(
+			"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59");
 	@FXML
     private DatePicker dateDP;
 
@@ -52,10 +53,10 @@ public class FindHikeViewController implements Initializable {
     private Button loghikeBTN;
 
     @FXML
-    private ChoiceBox<Integer> hoursCB;
+    private ChoiceBox<String> hoursCB;
 
     @FXML
-    private ChoiceBox<Integer> minutesCB;
+    private ChoiceBox<String> minutesCB;
 
     @FXML
     private TableView<Trail> TrailsTV;
@@ -127,11 +128,18 @@ public class FindHikeViewController implements Initializable {
     @FXML
     void logHike(ActionEvent event) {
     	System.out.println("logHike: incomplete");
+    	TrailHikedInstance trailHiked = new TrailHikedInstance(loggedInUser,dateDP.getValue(), hoursCB.getValue() + "Hours " + minutesCB.getValue() + "Minutes", selectedTrail);
+    	loggedInUser.getHistory().getHistoryLL().add(trailHiked);
+    	appInstance.getTotalTrailHistory().addHike(loggedInUser, trailHiked);
     	clearLogFields();
+    	selectedTrail = null;
     	loghikeHB.setDisable(true);
+    	System.out.println("logHike: incomplete ");
     }
     public void clearLogFields() {
-    	dateDP;
+    	dateDP.setValue(null);
+    	hoursCB.setValue("Hours");
+    	minutesCB.setValue("Minutes");
     }
     
     @FXML 

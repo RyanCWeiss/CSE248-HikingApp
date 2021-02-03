@@ -1,11 +1,12 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class TrailHikedInstance implements Serializable{
 
-	private Date date;
+	private LocalDate date;
 	private String trailType;
 	private String duration;
 	private Trail trail;
@@ -18,7 +19,7 @@ public class TrailHikedInstance implements Serializable{
 	private String trailAddress;
 	private String trailID;
 	
-	public TrailHikedInstance(User user, Date date, String duration, Trail trail) {
+	public TrailHikedInstance(User user, LocalDate date, String duration, Trail trail) {
 		
 		this.user = user;
 		this.username = user.getUsername();
@@ -52,11 +53,11 @@ public class TrailHikedInstance implements Serializable{
 		this.trailType = trailType;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
