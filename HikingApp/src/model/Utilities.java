@@ -29,7 +29,7 @@ public class Utilities implements Initializable{
 	 */
 	public static String generateTrailID() {
 		
-		return "Trail-" + appInstance.getIdNum();
+		return "Trail-" + app.HikingApp.getAppInstance().getIdNum();
 	}
 	/*
 	 * User Creation validations
@@ -226,7 +226,7 @@ public class Utilities implements Initializable{
 		
 		for (int i = 0; i < 500; i++) {
 			int j = i/26;
-			String name = baseName + ((char)((int)(Math.random() * 90-65)+65)) + j;
+			String name = baseName + ((char)((int)(Math.random() * 26) + 65)) + j;
 			int typeInt = (int)(Math.random()*3);
 			int difficultyInt = (int)(Math.random()*3);
 			String type;

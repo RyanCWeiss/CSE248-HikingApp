@@ -10,10 +10,11 @@ import javafx.fxml.Initializable;
 public class TrailContainer  implements Serializable, Initializable {
 
 	public static HikingAppInstance appInstance;
-	
+	private int count;
 	private TreeMap<String, Trail> trailTM;
 	
 	public TrailContainer(){
+		this.count = 0;
 		this.trailTM = new TreeMap<String, Trail>();
 	}
 	
@@ -39,13 +40,30 @@ public class TrailContainer  implements Serializable, Initializable {
 	}
 	
 	/*
+	 * remove a trail
+	 */
+	public Trail removeTrail(String trailName) {
+		if (containsKeyIgnoreCase(trailName)) {
+			Trail trail = getIgnoreCase(trailName);
+			trailTM.remove(trailName);
+			count--;
+			return trail;
+		}
+		return null;
+	}
+	
+	/*
 	 * add a new trail
 	 */
 	public Trail putIfAbsent(Trail trail) {
+		if (count >=50000) {
+			System.out.println("System is at 100% Trail capacity: trail was not added");
+			return null;
+		}
 		if (!this.containsKeyIgnoreCase(trail.getTrailName())) {
 			System.out.println("Putting trail...");
 			this.put(trail);
-			
+			count++;
 			return trail;
 		} else {
 			return null;

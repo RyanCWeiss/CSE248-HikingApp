@@ -16,12 +16,15 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.HikingAppInstance;
 import model.Trail;
@@ -31,9 +34,14 @@ public class AdminTrailViewController implements Initializable{
 
 	public static HikingAppInstance appInstance;
 	private static ObservableList<Trail >displayedTrails;
-	private static User loggedInUser;
 	private static Trail selectedTrail;
 	
+	@FXML
+	private static ObservableList<String> typeList = FXCollections.observableArrayList(
+		    "Loop", "Out and Back", "Point to Point");
+	@FXML
+	private static ObservableList<String> difficultyList = FXCollections.observableArrayList(
+		    "Easy", "Moderate", "Hard");
     @FXML
     private TableView<Trail> trailsTV;
 
@@ -56,7 +64,7 @@ public class AdminTrailViewController implements Initializable{
     private TableColumn<Trail, String> typeTC;
 
     @FXML
-    private TextField typeTF;
+    private ChoiceBox<String> typeCB;
 
     @FXML
     private Button searchtrailBTN;
@@ -86,7 +94,7 @@ public class AdminTrailViewController implements Initializable{
     private TextField lengthTF;
 
     @FXML
-    private TextField difficultyTF;
+    private ChoiceBox<String> difficultyCB;
 
     @FXML
     private Button logoutBTN;
@@ -129,18 +137,95 @@ public class AdminTrailViewController implements Initializable{
 
     @FXML
     void clearTextFields(ActionEvent event) {
-    	
+    	trailnameTF.setText("");
+		addressTF.setText("");
+		difficultyCB.setValue("Difficulty");;
+		typeCB.setValue("Type");
+		elevationTF.setText("");
+		lengthTF.setText("");
+		trailnameTF.setDisable(false);
+		selectedTrail = null;
+		createnewtrailBTN.setDisable(false);
     	System.out.println("clearTextFields: incomplete");
     }
 
     @FXML
-    void createNewTrail(ActionEvent event) {
+    void updateTrail(ActionEvent event) {
 
+
+    	System.out.println("updateTrail: incomplete");
+    }
+	
+    /*
+     * check that the fields have valid values
+     */
+    private boolean checkFields() {
+    	boolean trailnameValid = (!trailnameTF.getText().isBlank() && !appInstance.getTrailContainer().containsKeyIgnoreCase(trailnameTF.getText()));
+    	boolean addressValid = !trailnameTF.getText().isBlank();
+    	
+    	boolean difficultyValid = (!difficultyCB.getSelectionModel().getSelectedItem().contentEquals("Difficulty"));
+    	boolean typeValid = (!typeCB.getSelectionModel().getSelectedItem().contentEquals("Type"));
+    	
+    	boolean elevationValid = (!elevationTF.getText().isBlank() && canParseToDouble(elevationTF.getText()));;
+    	boolean lengthValid = (!lengthTF.getText().isBlank() && canParseToDouble(lengthTF.getText()));
+    	
+    	return trailnameValid && addressValid && difficultyValid && typeValid && elevationValid && lengthValid;
+    }
+    
+    /*
+     * check if a String can be parsed as a double
+     */
+    private boolean canParseToDouble(String s) {
+    	if (s == null) {
+    		return false;
+    	}
+        try {
+            double d = Double.parseDouble(s);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+    
+    @FXML
+    void createNewTrail(ActionEvent event) {
+    	if (checkFields()) {
+    		String difficulty = difficultyCB.getValue();
+    		String type = typeCB.getValue();
+    		Trail trail = new Trail(trailnameTF.getText(), addressTF.getText(), Double.parseDouble(elevationTF.getText()), Double.parseDouble(lengthTF.getText()), difficulty, type);
+    		appInstance.getTrailContainer().putIfAbsent(trail);
+    	} else {
+    		System.out.println("Trail invalid");
+    	}
 
     	System.out.println("createNewTrail: incomplete");
     }
     
-   
+    @FXML 
+    public void selectTrail(MouseEvent event) {
+		selectedTrail = trailsTV.getSelectionModel().getSelectedItem();
+		
+		if (selectedTrail != null) {
+			System.out.println("selectTrail: incomplete (add fill data feilds of trail feature.");
+			trailnameTF.setText(selectedTrail.getTrailName());
+			addressTF.setText(selectedTrail.getAddress());
+			difficultyCB.setValue(selectedTrail.getDifficulty());
+			typeCB.setValue(selectedTrail.getType());
+			elevationTF.setText(selectedTrail.getElevationGain() + "");
+			lengthTF.setText(selectedTrail.getLength() + "");
+			trailnameTF.setDisable(true);
+			createnewtrailBTN.setDisable(true);
+		} else {
+			trailnameTF.setText("");
+			addressTF.setText("");
+//			difficultyCB.
+//			typeCB.
+			elevationTF.setText("");
+			lengthTF.setText("");
+			trailnameTF.setDisable(false);
+			createnewtrailBTN.setDisable(false);
+		}
+	}
     @FXML
     void update(ActionEvent event) {
     	
@@ -366,19 +451,14 @@ public class AdminTrailViewController implements Initializable{
     	System.out.println("searchTrail: incomplete");
     }
     
-    @FXML
-    void updateTrail(ActionEvent event) {
-
-
-    	System.out.println("updateTrail: incomplete");
-    }
-	
+   
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		appInstance = app.HikingApp.getAppInstance();
-		loggedInUser = appInstance.getLoggedInUser();
+		typeCB.setItems(typeList);
+		difficultyCB.setItems(difficultyList);
 		selectedTrail = null;
 	}
 	
