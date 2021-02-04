@@ -10,9 +10,13 @@ import java.util.concurrent.TimeUnit;
 
 public class TrailHikedInstance implements Serializable{
 
-	private LocalDate date;
+	private LocalDate startDate;
+	private LocalDate endDate;
+	private String startTime;
+	private String endTime;
 	private String trailType;
 	private String duration;
+	private String difficulty;
 	private Trail trail;
 	private User user;
 	private String username;
@@ -23,13 +27,17 @@ public class TrailHikedInstance implements Serializable{
 	private String trailAddress;
 	private String trailID;
 	private String pace;
+	private String pic;
 	
-	public TrailHikedInstance(User user, LocalDate startDate, LocalDate endDate, String startTimeHour, String startTimeMin, String endTimeHour, String endTimeMin, Trail trail) throws ParseException {
+	public TrailHikedInstance(User user, LocalDate startDate, LocalDate endDate, String startTimeHour, String startTimeMin, String endTimeHour, String endTimeMin, Trail trail, String pic) throws ParseException {
 		int minInDay = 1440;
-		
+		this.pic = pic;
 		this.user = user;
 		this.username = user.getUsername();
-		this.date = date;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startTime = startTimeHour +":" + startTimeMin;
+		this.endTime = endTimeHour +":" + endTimeMin;
 		this.duration = calculateDuration(startDate, endDate, startTimeHour, startTimeMin, endTimeHour, endTimeMin);
 		this.trail = trail;
 		this.trailName = trail.getTrailName();
@@ -40,10 +48,19 @@ public class TrailHikedInstance implements Serializable{
 		this.trailAddress = trail.getAddress();
 		this.trailID = trail.getTrailID();
 		this.trailType = trail.getType();
+		this.difficulty = trail.getDifficulty();
 		this.pace = ((int)(trailLength /(calculateDurationInt(startDate, endDate, startTimeHour, startTimeMin, endTimeHour, endTimeMin)/60.0))*100)/100.0 + " mph";
 	
 	}
 	
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
 	public String toString() {
 		return "Trail: " + trailName + " User: " + this.user.getUsername() + " Time: " + duration + " Pace: " + pace;
 	}
@@ -106,14 +123,6 @@ public class TrailHikedInstance implements Serializable{
 
 	public void setTrailType(String trailType) {
 		this.trailType = trailType;
-	}
-
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
 	}
 
 	public String getDuration() {
@@ -180,12 +189,60 @@ public class TrailHikedInstance implements Serializable{
 		this.trailAddress = trailAddress;
 	}
 
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getPace() {
+		return pace;
+	}
+
+	public void setPace(String pace) {
+		this.pace = pace;
+	}
+
 	public String getTrailID() {
 		return trailID;
 	}
 
 	public void setTrailID(String trailID) {
 		this.trailID = trailID;
+	}
+
+	public String getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(String difficulty) {
+		this.difficulty = difficulty;
 	}
 	
 	

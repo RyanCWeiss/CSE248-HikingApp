@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
@@ -24,11 +25,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 import model.HikingAppInstance;
 import model.Trail;
 import model.TrailHikedInstance;
@@ -40,109 +45,102 @@ public class FindHikeViewController implements Initializable {
 	public static ObservableList<Trail> displayedTrails;
 	private static Trail selectedTrail;
 	private static User loggedInUser;
-	
+	private static String hikePicString;
 	
 	@FXML
 	private static ObservableList<String> hourList = FXCollections.observableArrayList(
-		    "0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24");
+		    "0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23");
 	@FXML
 	private static ObservableList<String> minuteList = FXCollections.observableArrayList(
 			"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59");
-
+	@FXML 
+	private Button addpictureBTN;	
+	@FXML 
+	private AnchorPane anchorpane;	
     @FXML
     private Button loghikeBTN;
-    
     @FXML
     private DatePicker startdateDP;
-
     @FXML
     private ChoiceBox<String> starthoursCB;
-
     @FXML
     private ChoiceBox<String> startminutesCB;
-    
     @FXML
     private DatePicker enddateDP;
-
     @FXML
     private ChoiceBox<String> endhoursCB;
-
     @FXML
     private ChoiceBox<String> endminutesCB;
-
     @FXML
     private TableView<Trail> TrailsTV;
-
     @FXML
     private Button logoutBTN;
-
     @FXML
-    private Button homeBTN;
-    
+    private Button homeBTN;   
     @FXML
     private ToggleButton easyTB;
-    
     @FXML
-    private ToggleButton moderateTB;
-    
+    private ToggleButton moderateTB;    
     @FXML
-    private ToggleButton hardTB;
-    
+    private ToggleButton hardTB;    
     @FXML
     private ToggleButton loopTB;
-    
     @FXML
     private ToggleButton outandbackTB;
-    
     @FXML
     private ToggleButton pointtopointTB;
-    
     @FXML
     private TextField searchTF;
-
     @FXML
     private TextField minlengthTF;
-
     @FXML
     private TextField maxlengthTF;
-
     @FXML
     private TextField mingainTF;
-
     @FXML
     private TextField maxgainTF;
-    
     @FXML
     private GridPane loghikeGP;
-    
     @FXML
     private TableView<Trail> trailsTV;
-
     @FXML
     private TableColumn<Trail, String> trailTC;
-
     @FXML
     private TableColumn<Trail, String> addressTC;
-
     @FXML
     private TableColumn<Trail, Double> elevationgainTC;
-
     @FXML
     private TableColumn<Trail, Double>lengthTC;
-
     @FXML
     private TableColumn<Trail, String> difficultyTC;
-    
     @FXML
     private TableColumn<Trail, String> typeTC;
 
+    
+    
+    
+    @FXML
+	private void addPicture(ActionEvent event) {
+	    FileChooser chooser = new FileChooser();
+	    chooser.setTitle("Open File");
+	    chooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+	    Stage stage = (Stage)anchorpane.getScene().getWindow();
+	    File file = chooser.showOpenDialog(stage);
+	    if (file != null) {
+	    	String s = file.getName();
+            System.out.println(s);
+            hikePicString =("/resources/" +s);
+           
+//	    	profilepicIV.setImage(new Image(appInstance.getLoggedInUser().getProfilePicString()));  
+        }
+	}
 
     @FXML
     void logHike(ActionEvent event) throws ParseException {
     	System.out.println("logHike: incomplete");
     	
     	
-    	TrailHikedInstance trailHiked = new TrailHikedInstance(loggedInUser,startdateDP.getValue(), enddateDP.getValue(), starthoursCB.getValue(), startminutesCB.getValue(), endhoursCB.getValue(), endminutesCB.getValue(), selectedTrail);
+    	TrailHikedInstance trailHiked = new TrailHikedInstance(loggedInUser,startdateDP.getValue(), enddateDP.getValue(), starthoursCB.getValue(), startminutesCB.getValue(), endhoursCB.getValue(), endminutesCB.getValue(), selectedTrail, hikePicString);
     	
     	
     	loggedInUser.getHistory().getHistoryLL().add(trailHiked);

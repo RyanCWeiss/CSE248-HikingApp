@@ -313,7 +313,9 @@ public class Utilities implements Initializable{
 		if (app.HikingApp.appInstance == null) {
 			app.HikingApp.appInstance = new HikingAppInstance();
 			appInstance = app.HikingApp.appInstance;
-			appInstance.getUserContainer().putIfAbsent(new User("Jane", "Jane", "Doe", "Doe", "1234567890" ));
+			appInstance.getUserContainer().putIfAbsent(new Manager("Jane", "Jane", "Doe", "Doe", "1234567890" ));
+			appInstance.getUserContainer().putIfAbsent(new Admin("Ryanw21", "Ryan", "Weiss", "Ryanw#21", "1234567890" ));
+			appInstance.getUserContainer().putIfAbsent(new User("Ryan1", "Ryan", "Weiss", "Ryanw1", "1234567890" ));
 			populateRandomUsers();
 			populateRandomTrails();
 			

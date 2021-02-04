@@ -11,7 +11,7 @@ public class UserContainer  implements Serializable{
 
 //	public static HikingAppInstance appInstance;
 	
-	public TreeMap<String, User> userTM;	// <User.username.toLowerCase(),User pair>
+	private TreeMap<String, User> userTM;	// <User.username.toLowerCase(),User pair>
 	
 	public UserContainer() {
 		this.userTM = new TreeMap<String, User>();
@@ -48,6 +48,18 @@ public class UserContainer  implements Serializable{
 	private void put(User user) {
 		userTM.put(user.getUsername().toLowerCase(), user);
 		System.out.println("User Stored: " + this.getIgnoreCase(user.getUsername()).toString() + "...");
+	}
+
+	public void replaceValue(User user) {
+		userTM.replace(user.getUsername().toLowerCase(), user);
+	}
+
+	public TreeMap<String, User> getUserTM() {
+		return userTM;
+	}
+
+	public void setUserTM(TreeMap<String, User> userTM) {
+		this.userTM = userTM;
 	}
 	
 	
