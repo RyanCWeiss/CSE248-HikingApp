@@ -2,8 +2,12 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
+import java.util.Map.Entry;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,27 +19,32 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.HikingAppInstance;
+import model.Trail;
+import model.User;
 
 public class AdminControlsViewController implements Initializable {
 
 		public static HikingAppInstance appInstance;
+		private static ObservableList<User> searched;
 	
 	  	@FXML
-	    private TableView<?> historyTV;
+	    private TableView<User> userTV;
 
 	    @FXML
-	    private TableColumn<?, ?> trailnameTC;
+	    private TableColumn<User, String> usernameTC;
 
 	    @FXML
-	    private TableColumn<?, ?> usernameTC;
+	    private TableColumn<User, String> firstnameTC;
 
 	    @FXML
-	    private TableColumn<?, ?> durationTC;
-
+	    private TableColumn<User, String> lastnameTC;
+	    
 	    @FXML
-	    private Button searchtrailBTN;
+	    private TableColumn<User, String> phonenumberTC;
 
 	    @FXML
 	    private TextField searchTF;
@@ -44,8 +53,33 @@ public class AdminControlsViewController implements Initializable {
 	    private Button searchuserBTN;
 
 	    @FXML
-	    private Button searchuserBTN1;
+	    private Button edittrailBTN;
 
+	    @FXML
+	    void search(KeyEvent event){
+	    	System.out.println("searching");
+	    	if (searchTF.getText().isBlank()) {
+	    		
+	    		return;
+	    	}
+	    	String query = searchTF.getText().toLowerCase();
+	    	LinkedList<User> matches = new LinkedList<User>();
+	    	
+	    	for (Entry<String, User> 
+	        entry : appInstance.getUserContainer().getUserTM().entrySet()) {
+				if (entry.getValue().getUsername().toLowerCase().contains(query)) {
+					matches.add(entry.getValue());
+				}
+			}  	
+	    	
+	    	searched = FXCollections.observableArrayList(matches);
+	    	usernameTC.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
+	    	firstnameTC.setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
+			lastnameTC.setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
+			phonenumberTC.setCellValueFactory(new PropertyValueFactory<User, String>("phoneNumber"));
+	        userTV.setItems(searched);
+	    }
+	    
 	    @FXML
 	    private void logOut(ActionEvent event) {
 	    	

@@ -266,7 +266,7 @@ public class Utilities implements Initializable{
 			String lastName = names[1][(int)(Math.random()* size)];
 			String username = firstName+lastName + (i);
 			String password = lastName + i;
-			String phoneNumber = "631" + (int)(Math.random()* 999) + "" + (int)(Math.random()* 9999);
+			String phoneNumber = "631" + (int)(Math.random()* 10) + "" + (int)(Math.random()* 10) +""+ (int)(Math.random()* 10) + "" + (int)(Math.random()* 10) +""+ (int)(Math.random()* 10) + "" + (int)(Math.random()* 10) +""+ (int)(Math.random()* 10);
 			
 			User user = new User(username, firstName, lastName, password, phoneNumber);
 			users.putIfAbsent(user);
