@@ -35,7 +35,7 @@
                         <Font size="50.0" />
                      </font>
                   </Label>
-                  <GridPane alignment="CENTER" layoutX="304.0" layoutY="255.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="310.0" prefWidth="200.0">
+                  <GridPane alignment="CENTER" layoutX="307.0" layoutY="269.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="150.0" prefWidth="200.0" vgap="30.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="136.40274047851562" />
                      </columnConstraints>
@@ -72,7 +72,7 @@
                         <DropShadow />
                      </effect>
                   </Button>
-                  <TableView fx:id="historyTV" layoutX="520.0" layoutY="269.0" prefHeight="299.0" prefWidth="516.0">
+                  <TableView fx:id="historyTV" layoutX="520.0" layoutY="261.0" prefHeight="299.0" prefWidth="516.0">
                      <columns>
                         <TableColumn fx:id="trailTC" prefWidth="113.0" text="Trail" />
                         <TableColumn fx:id="lengthTC" prefWidth="110.0" text="Length" />
@@ -84,7 +84,7 @@
                         <DropShadow />
                      </effect>
                   </TableView>
-                  <GridPane hgap="10.0" layoutX="84.0" layoutY="225.0" prefHeight="328.0" prefWidth="200.0">
+                  <GridPane hgap="10.0" layoutX="86.0" layoutY="269.0" prefHeight="328.0" prefWidth="200.0" vgap="30.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -92,6 +92,7 @@
                       <RowConstraints maxHeight="85.0" minHeight="0.0" prefHeight="43.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="178.0" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="241.0" minHeight="10.0" prefHeight="210.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
@@ -136,6 +137,11 @@
                               </Button>
                            </children>
                         </HBox>
+                        <Button fx:id="removeuserBTN" mnemonicParsing="false" onAction="#removeUser" prefHeight="27.0" prefWidth="96.0" text="Remove User" GridPane.rowIndex="4">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
                      </children>
                   </GridPane>
                </children>

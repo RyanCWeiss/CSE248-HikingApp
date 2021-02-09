@@ -12,8 +12,6 @@
     <fullyQualifiedTypeName name="java.util.TreeMap"/>
     <fullyQualifiedTypeName name="model.Trail"/>
     <fullyQualifiedTypeName name="javafx.scene.control.cell.PropertyValueFactory"/>
-    <fullyQualifiedTypeName name="javafx.collections.ObservableList"/>
-    <fullyQualifiedTypeName name="model.User"/>
     <fullyQualifiedTypeName name="javafx.scene.input.MouseEvent"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.HBox"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ChoiceBox"/>
@@ -28,7 +26,15 @@
     <fullyQualifiedTypeName name="javafx.scene.control.TableView"/>
     <fullyQualifiedTypeName name="model.TrailHikedInstance"/>
     <fullyQualifiedTypeName name="javafx.scene.control.TableColumn"/>
-    <fullyQualifiedTypeName name="model.Admin"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
+    <fullyQualifiedTypeName name="com.sun.prism.Image"/>
+    <fullyQualifiedTypeName name="javafx.scene.image.Image"/>
+    <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
+    <fullyQualifiedTypeName name="model.Admin"/>
+    <fullyQualifiedTypeName name="model.Manager"/>
+    <fullyQualifiedTypeName name="model.UserHistory"/>
+    <fullyQualifiedTypeName name="model.User"/>
+    <fullyQualifiedTypeName name="javafx.collections.ObservableList"/>
+    <fullyQualifiedTypeName name="javafx.scene.input.KeyEvent"/>
 </qualifiedTypeNameHistroy>

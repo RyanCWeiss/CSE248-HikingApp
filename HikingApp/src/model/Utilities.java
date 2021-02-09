@@ -56,6 +56,25 @@ public class Utilities implements Initializable{
 		/*
 		 * can display errors if desired
 		 */
+		if (!validUsername) {
+			usernameTF.setText("Invalid Username");
+		}
+		if (!validFirstname) {
+			firstnameTF.setText("First Name can only contain letters");
+		}
+		if (!validLastname) {
+			lastnameTF.setText("First Name can only contain letters");
+		}
+		if (!validPassword) {
+			passwordTF.setText("Invalid Password");
+		}
+		if (!validConfirmPassword) {
+			confirmpasswordTF.setText("Password Missmatch");
+		}
+		if (!validPhonenumber) {
+			phonenumberTF.setText("Phone Number must be 10 digits");
+		}
+		
 		System.out.println("Utilities.validateNewUser: incomplete; display errors to the Scene");
 		
 		return validUsername && validFirstname && validLastname && validPassword && validConfirmPassword && validPhonenumber;
@@ -115,6 +134,9 @@ public class Utilities implements Initializable{
 	 * 	-> validate a new ensure the name fields are filled
 	 */
 	private static boolean validateNewFirstName(String firstname){							// the name contains only letters
+		if (firstname.length() == 0) {
+			return false;
+		}
 		boolean hasNonAlphabeticChar = false;
 		for (int i = 0; i < firstname.length() - 1; i++) {
 			char ch = firstname.charAt(i);
@@ -127,6 +149,9 @@ public class Utilities implements Initializable{
 	}
 		
 	private static boolean validateNewLastName(String lastname){							// the name contains only letters
+		if (lastname.length() == 0) {
+			return false;
+		}
 		boolean hasNonAlphabeticChar = false;
 		for (int i = 0; i < lastname.length() - 1; i++) {
 			char ch = lastname.charAt(i);
@@ -171,7 +196,12 @@ public class Utilities implements Initializable{
 		/*
 		 * can display errors if desired***
 		 */
-		System.out.println("Utilities.validateLogin: incomplete; display errors to the Scene");
+		if (!validUsername) {
+			usernameTF.setText("invalid Login");
+		}
+		if (!validPassword) {
+			usernameTF.setText("invalid Login");
+		}
 		
 		return validUsername && validPassword;
 	}

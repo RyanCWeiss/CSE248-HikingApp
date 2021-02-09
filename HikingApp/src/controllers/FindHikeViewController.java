@@ -332,8 +332,7 @@ public class FindHikeViewController implements Initializable {
     	return false;
     		
     }
-    
-    
+   
     @FXML
     void goHomeView(ActionEvent event) {
     	try {

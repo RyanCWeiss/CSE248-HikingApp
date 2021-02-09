@@ -69,6 +69,8 @@ public class AdminUserViewController implements Initializable{
     @FXML
     private Button searchuserBTN;
     @FXML
+    private Button removeuserBTN;
+    @FXML
     private TableView<TrailHikedInstance> historyTV; 
     @FXML
     private TableColumn<TrailHikedInstance, String> trailTC;
@@ -82,6 +84,12 @@ public class AdminUserViewController implements Initializable{
     private TableColumn<TrailHikedInstance, LocalDate> dateTC;
     @FXML 
     private AnchorPane anchorpane;
+    
+   @FXML 
+   void removeUser(ActionEvent event) {
+	   appInstance.getUserContainer().getUserTM().remove(searchedUser.getUsername().toLowerCase());
+	   clearUserInfo(event);
+   }
     
     @FXML
     void searchUser(ActionEvent event) {
@@ -117,6 +125,11 @@ public class AdminUserViewController implements Initializable{
             else if (!(searchedUser instanceof Admin)){
         		promoteuserBTN.setDisable(false);
             }
+            if ((loggedInUser instanceof Manager) && !(searchedUser instanceof Manager)) {// manager can always remove users beneath it**
+           		removeuserBTN.setDisable(false);
+    	   } else  if ((loggedInUser instanceof Admin) && !(searchedUser instanceof Admin)&& !(searchedUser instanceof Manager)) {// manager can always remove users beneath it**
+          		removeuserBTN.setDisable(false);
+    	   }
     	}
     	System.out.println("searchUser: incomplete");
     }
