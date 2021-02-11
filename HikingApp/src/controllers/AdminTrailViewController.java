@@ -152,20 +152,23 @@ public class AdminTrailViewController implements Initializable{
 		createnewtrailBTN.setDisable(false);
 		deletetrailBTN.setDisable(true);
 		updatetrailBTN.setDisable(true);
-		System.out.println("clearTextFields: incomplete");
     }
     @FXML
     void deleteTrail(ActionEvent event) {
     	deletetrailBTN.setDisable(true);
 		updatetrailBTN.setDisable(true);
-		appInstance.getTrailContainer().getTrailTM().remove(selectedTrail.getTrailName().toLowerCase());
+		
+		/*
+		 * delete the trail
+		 */
+		appInstance.getTrailContainer().removeTrail(selectedTrail);
 		
 		displayedTrails = FXCollections.observableArrayList(search());
 		trailsTV.setItems(displayedTrails);
 		trailsTV.getColumns().get(0).setVisible(false);
 		trailsTV.getColumns().get(0).setVisible(true);
 		clearTextFields(event);
-		System.out.println("deleteTrail: incomplete");
+    	update(event);
     }
     @FXML
     void updateTrail(ActionEvent event) {
@@ -188,7 +191,7 @@ public class AdminTrailViewController implements Initializable{
      * check that the fields have valid values
      */
     private boolean checkFields() {
-    	boolean trailnameValid = (!trailnameTF.getText().isBlank() && !appInstance.getTrailContainer().containsKeyIgnoreCase(trailnameTF.getText()));
+    	boolean trailnameValid = (!trailnameTF.getText().isBlank());
     	boolean addressValid = !trailnameTF.getText().isBlank();
     	
     	boolean difficultyValid = (!difficultyCB.getSelectionModel().getSelectedItem().contentEquals("Difficulty"));
@@ -225,8 +228,7 @@ public class AdminTrailViewController implements Initializable{
     	} else {
     		System.out.println("Trail invalid");
     	}
-
-    	System.out.println("createNewTrail: incomplete");
+    	update(event);
     }
     
     @FXML 
@@ -269,7 +271,6 @@ public class AdminTrailViewController implements Initializable{
         trailsTV.setItems(displayedTrails);
         trailsTV.getColumns().get(0).setVisible(false);
 		trailsTV.getColumns().get(0).setVisible(true);
-    	System.out.println("update: incomplete");
     }
     
     @FXML
@@ -285,7 +286,6 @@ public class AdminTrailViewController implements Initializable{
         trailsTV.setItems(displayedTrails);
         trailsTV.getColumns().get(0).setVisible(false);
 		trailsTV.getColumns().get(0).setVisible(true);
-    	System.out.println("update: incomplete");
     }
     
     public LinkedList<Trail> search(){
@@ -480,13 +480,6 @@ public class AdminTrailViewController implements Initializable{
 		}
     }
 
-    @FXML
-    void searchTrail(ActionEvent event) {
-
-
-    	System.out.println("searchTrail: incomplete");
-    }
-    	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub

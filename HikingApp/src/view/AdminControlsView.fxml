@@ -46,12 +46,7 @@
                   <DropShadow />
                </effect>
             </TextField>
-            <Button fx:id="homeBTN" layoutX="879.0" layoutY="654.0" mnemonicParsing="false" onAction="#goHomeView" text="Home">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
-            <Button fx:id="logoutBTN" layoutX="960.0" layoutY="656.0" mnemonicParsing="false" onAction="#logOut" text="Log Out">
+            <Button fx:id="homeBTN" layoutX="865.0" layoutY="654.0" mnemonicParsing="false" onAction="#goHomeView" text="Home">
                <effect>
                   <DropShadow />
                </effect>
@@ -70,6 +65,11 @@
                   </Button>
                </children>
             </VBox>
+            <Button fx:id="logoutBTN" layoutX="932.0" layoutY="654.0" mnemonicParsing="false" onAction="#logOut" text="Log Out">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
          </children>
       </AnchorPane>
    </children>

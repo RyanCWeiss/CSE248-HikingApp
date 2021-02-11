@@ -77,24 +77,6 @@ public class TrailHikedInstance implements Serializable{
 	}
 	
 	private String calculateDuration(LocalDate startDate, LocalDate endDate, String startTimeHour, String startTimeMin, String endTimeHour, String endTimeMin) throws ParseException {
-		
-//		int startingMin = Integer.parseInt(startTimeHour)*60 + Integer.parseInt(startTimeMin);
-//		int endingMin = Integer.parseInt(endTimeHour)*60 + Integer.parseInt(endTimeMin);
-//		
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
-//	    Date firstDate = sdf.parse(startDate.toString());
-//	    Date secondDate = sdf.parse(startDate.toString());
-//
-//	    long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
-//	    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-//	    
-//	    long dayDifferenceInMin = diff * 1440;
-//	    
-//	    int totalDifferenceInMin = (int)((endingMin - startingMin) + dayDifferenceInMin);
-//	    int hours = totalDifferenceInMin /60;
-//	    int min = totalDifferenceInMin % 60;
-//		
-//		return "" + hours + " Hours " + min + " Min";
 		int totalDifferenceInMin = calculateDurationInt(startDate, endDate, startTimeHour, startTimeMin, endTimeHour, endTimeMin);
 	    int hours = totalDifferenceInMin /60;
 	    int min = totalDifferenceInMin % 60;
@@ -111,7 +93,6 @@ public class TrailHikedInstance implements Serializable{
 
 	    long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
 	    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-//	    System.out.println(firstDate.ge);
 	    
 	    long dayDifferenceInMin = diff * 1440;
 	    
