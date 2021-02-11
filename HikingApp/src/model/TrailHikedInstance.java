@@ -28,9 +28,11 @@ public class TrailHikedInstance implements Serializable{
 	private String trailID;
 	private String pace;
 	private String pic;
+	private String address;
+	
 	
 	public TrailHikedInstance(User user, LocalDate startDate, LocalDate endDate, String startTimeHour, String startTimeMin, String endTimeHour, String endTimeMin, Trail trail, String pic) throws ParseException {
-		int minInDay = 1440;
+
 		this.pic = pic;
 		this.user = user;
 		this.username = user.getUsername();
@@ -49,10 +51,19 @@ public class TrailHikedInstance implements Serializable{
 		this.trailID = trail.getTrailID();
 		this.trailType = trail.getType();
 		this.difficulty = trail.getDifficulty();
-		this.pace = ((int)(trailLength /(calculateDurationInt(startDate, endDate, startTimeHour, startTimeMin, endTimeHour, endTimeMin)/60.0))*100)/100.0 + " mph";
+		this.address = trail.getAddress();
+		this.pace = ((int)(calculateDurationInt(startDate, endDate, startTimeHour, startTimeMin, endTimeHour, endTimeMin))*100)/100.0 /(trailLength) + " min/mi";
 	
 	}
 	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public String getPic() {
 		return pic;
 	}

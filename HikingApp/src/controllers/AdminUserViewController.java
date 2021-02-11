@@ -81,6 +81,10 @@ public class AdminUserViewController implements Initializable{
     @FXML
     private TableColumn<TrailHikedInstance, String> durationTC;
     @FXML
+    private TableColumn<TrailHikedInstance, String> addressTC;
+    @FXML
+    private TableColumn<TrailHikedInstance, String> paceTC;
+    @FXML
     private TableColumn<TrailHikedInstance, LocalDate> dateTC;
     @FXML 
     private AnchorPane anchorpane;
@@ -108,6 +112,8 @@ public class AdminUserViewController implements Initializable{
         	lengthTC.setCellValueFactory(new PropertyValueFactory<TrailHikedInstance, Double>("trailLength"));
             difficultyTC.setCellValueFactory(new PropertyValueFactory<TrailHikedInstance, String>("difficulty"));
             dateTC.setCellValueFactory(new PropertyValueFactory<TrailHikedInstance, LocalDate>("startDate"));
+            addressTC.setCellValueFactory(new PropertyValueFactory<TrailHikedInstance, String>("address"));
+            paceTC.setCellValueFactory(new PropertyValueFactory<TrailHikedInstance, String>("pace"));
             historyTV.setItems(displayedTrailHistory);
             historyTV.getColumns().get(0).setVisible(false);
             historyTV.getColumns().get(0).setVisible(true);

@@ -277,7 +277,7 @@ public class Utilities implements Initializable{
 			}
 			double length = ((int)(Math.random() * 200))/10.0;
 			double gain = ((int)(Math.random() * 5000))/10.0;
-			trails.putIfAbsent(new Trail(name, "random address that doesnt matter for functionality", gain, length, difficulty, type));
+			trails.addTrail(new Trail(name, "random address that doesnt matter for functionality", gain, length, difficulty, type));
 			
 		}
 	}

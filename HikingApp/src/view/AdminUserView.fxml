@@ -35,7 +35,7 @@
                         <Font size="50.0" />
                      </font>
                   </Label>
-                  <GridPane alignment="CENTER" layoutX="307.0" layoutY="269.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="150.0" prefWidth="200.0" vgap="30.0">
+                  <GridPane alignment="CENTER" layoutX="284.0" layoutY="269.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="170.0" prefWidth="173.0" vgap="30.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="136.40274047851562" />
                      </columnConstraints>
@@ -72,19 +72,21 @@
                         <DropShadow />
                      </effect>
                   </Button>
-                  <TableView fx:id="historyTV" layoutX="520.0" layoutY="261.0" prefHeight="299.0" prefWidth="516.0">
+                  <TableView fx:id="historyTV" layoutX="471.0" layoutY="261.0" prefHeight="299.0" prefWidth="565.0">
                      <columns>
-                        <TableColumn fx:id="trailTC" prefWidth="113.0" text="Trail" />
-                        <TableColumn fx:id="lengthTC" prefWidth="110.0" text="Length" />
-                        <TableColumn fx:id="difficultyTC" text="Difficulty" />
-                        <TableColumn fx:id="durationTC" prefWidth="114.5" text="Duration" />
-                        <TableColumn fx:id="dateTC" prefWidth="97.5" text="Date" />
+                        <TableColumn fx:id="trailTC" prefWidth="89.0" text="Trail Name" />
+                        <TableColumn fx:id="addressTC" prefWidth="105.0" text="Address" />
+                        <TableColumn fx:id="lengthTC" prefWidth="63.0" text="Length" />
+                        <TableColumn fx:id="difficultyTC" prefWidth="93.0" text="Difficulty" />
+                        <TableColumn fx:id="durationTC" prefWidth="78.5" text="Duration" />
+                        <TableColumn fx:id="dateTC" prefWidth="89.5" text="Date Started" />
+                        <TableColumn fx:id="paceTC" prefWidth="46.0" text="Pace" />
                      </columns>
                      <effect>
                         <DropShadow />
                      </effect>
                   </TableView>
-                  <GridPane hgap="10.0" layoutX="86.0" layoutY="269.0" prefHeight="328.0" prefWidth="200.0" vgap="30.0">
+                  <GridPane hgap="10.0" layoutX="86.0" layoutY="269.0" prefHeight="328.0" prefWidth="181.0" vgap="30.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -115,7 +117,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <ImageView fx:id="profilepicIV" blendMode="DARKEN" fitHeight="202.0" fitWidth="201.0" pickOnBounds="true" GridPane.rowIndex="2">
+                        <ImageView fx:id="profilepicIV" blendMode="DARKEN" fitHeight="202.0" fitWidth="183.0" pickOnBounds="true" GridPane.rowIndex="2">
                            <image>
                               <Image url="@../resources/initial_profile_picture.jpg" />
                            </image>
@@ -137,7 +139,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <Button fx:id="removeuserBTN" mnemonicParsing="false" onAction="#removeUser" prefHeight="27.0" prefWidth="96.0" text="Remove User" GridPane.rowIndex="4">
+                        <Button fx:id="removeuserBTN" mnemonicParsing="false" onAction="#removeUser" prefHeight="27.0" prefWidth="94.0" text="Remove User" GridPane.rowIndex="4">
                            <effect>
                               <DropShadow />
                            </effect>

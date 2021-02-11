@@ -221,7 +221,7 @@ public class AdminTrailViewController implements Initializable{
     		String difficulty = difficultyCB.getValue();
     		String type = typeCB.getValue();
     		Trail trail = new Trail(trailnameTF.getText(), addressTF.getText(), Double.parseDouble(elevationTF.getText()), Double.parseDouble(lengthTF.getText()), difficulty, type);
-    		appInstance.getTrailContainer().putIfAbsent(trail);
+    		appInstance.getTrailContainer().addTrail(trail);
     	} else {
     		System.out.println("Trail invalid");
     	}
@@ -289,14 +289,21 @@ public class AdminTrailViewController implements Initializable{
     }
     
     public LinkedList<Trail> search(){
-    	System.out.println("search: incomplete");
-    	
+
+    	LinkedList<Trail> nameMatches = new LinkedList<Trail>();
     	LinkedList<Trail> matches = new LinkedList<Trail>();
     	
-    	for (Entry<String, Trail> 
-        entry : appInstance.getTrailContainer().getTrailTM().entrySet()) {
-			if (stackFilters(entry.getValue())) {
-				matches.add(entry.getValue());
+    	for (Entry<String, LinkedList<Trail>> // for each LL in TM ->  check each entry in LL
+    	entry : appInstance.getTrailContainer().getTrailTM().entrySet()) {
+			if (queryFilter(entry.getKey())) {
+				for (Trail trail : entry.getValue()) {
+					nameMatches.add(trail);
+				}
+			}
+		}  	    	
+    	for (Trail trail: nameMatches) {
+			if (stackFilters(trail)) {
+				matches.add(trail);
 			}
 		}  	
     	return matches;
@@ -307,19 +314,18 @@ public class AdminTrailViewController implements Initializable{
      */
     private boolean stackFilters(Trail trail) {
     	
-    	return queryFilter(searchTF, trail) && lengthFilter(minlengthTF, maxlengthTF, trail) && gainFilter(mingainTF, maxgainTF, trail) && difficultyFilter(easyTB, moderateTB, hardTB, trail) && typeFilter(loopTB, outandbackTB, pointtopointTB, trail);
+    	return lengthFilter(minlengthTF, maxlengthTF, trail) && gainFilter(mingainTF, maxgainTF, trail) && difficultyFilter(easyTB, moderateTB, hardTB, trail) && typeFilter(loopTB, outandbackTB, pointtopointTB, trail);
     }
     
     /*
      * title partial match filter
      */
-    private boolean queryFilter(TextField searchTF, Trail trail) {
+    private boolean queryFilter(String trailName) {
     	if (searchTF.getText().isBlank()) {
     		return true;
     	}
-    	String query = searchTF.getText();
+    	String query = searchTF.getText().toLowerCase();
     	String [] words = query.split("\\s+");
-    	String trailName = trail.getTrailName();
     	for (String w: words) {
     		if (!trailName.contains(w)) {
     			return false;
@@ -480,9 +486,7 @@ public class AdminTrailViewController implements Initializable{
 
     	System.out.println("searchTrail: incomplete");
     }
-    
-   
-	
+    	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -491,8 +495,6 @@ public class AdminTrailViewController implements Initializable{
 		difficultyCB.setItems(difficultyList);
 		selectedTrail = null;
 	}
-	
-	
 	
 	
 }
